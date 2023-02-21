@@ -1,9 +1,9 @@
 import discord
-#import os
+import os
 from watchpubs import get_watchpubs_link, get_movie_link
 
 client = discord.Client(intents=discord.Intents.all())
-#TOKEN = os.environ['TOKEN']
+TOKEN = os.environ['TOKEN']
 
 @client.event
 async def on_ready():
@@ -30,4 +30,4 @@ async def on_message(message):
     movieName = message.content.split("$movie ")[1].strip()
     await message.channel.send(get_watchpubs_link(movieName))
 
-client.run('MTA3NzM5MzU4NDcwMzE1NjI5NA.GyOs8L.lFH3S3qnkx1qP8DWBZYT3AzJqAgjh2iPErmHr8')
+client.run(TOKEN)
