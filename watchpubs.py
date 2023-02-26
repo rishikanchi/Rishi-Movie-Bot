@@ -11,11 +11,10 @@ from selenium.webdriver.common.by import By
 
 def get_movie_link(movieName):
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    driver = Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    driver = Chrome(options=chrome_options, headless=True)
 
     movieLink = "https://soap2day.to/search/keyword/" + movieName.replace(" ","%20")
     #Opens webpage
@@ -38,7 +37,11 @@ def get_movie_link(movieName):
     return video.get_attribute('src')
 
 def get_watchpubs_link(movieName):
-    driver = Chrome(headless=True)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = Chrome(options=chrome_options, headless=True)
 
     videoLink = get_movie_link(movieName)
 
