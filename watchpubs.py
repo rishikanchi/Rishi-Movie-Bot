@@ -1,5 +1,6 @@
 from undetected_chromedriver import Chrome
 import time 
+from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
@@ -8,7 +9,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 def get_movie_link(movieName):
-    driver = Chrome(headless=True)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
 
     movieLink = "https://soap2day.to/search/keyword/" + movieName.replace(" ","%20")
     #Opens webpage
