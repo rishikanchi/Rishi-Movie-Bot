@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 def get_movie_link(movieName):
-    driver = Chrome()
+    driver = Chrome(headless=True)
 
     movieLink = "https://soap2day.to/search/keyword/" + movieName.replace(" ","%20")
     #Opens webpage
@@ -31,7 +31,7 @@ def get_movie_link(movieName):
     return video.get_attribute('src')
 
 def get_watchpubs_link(movieName):
-    driver = Chrome(headless=true)
+    driver = Chrome(headless=True)
 
     videoLink = get_movie_link(movieName)
 
