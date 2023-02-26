@@ -31,7 +31,7 @@ def get_movie_link(movieName):
     return video.get_attribute('src')
 
 def get_watchpubs_link(movieName):
-    driver = Chrome()
+    driver = Chrome(headless=true)
 
     videoLink = get_movie_link(movieName)
 
