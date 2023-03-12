@@ -1,9 +1,7 @@
-from undetected_chromedriver import Chrome
-
 import time 
 import os
 
-from selenium import webdriver
+import undetected_chromedriver as webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -15,16 +13,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 def get_movie_link(movieName):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--headless=new')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    chrome_options.add_experimental_option('useAutomationExtension', False)
-    chrome_options.add_argument("window-size=1920,1080")
-    chromedriver = "./chromedriver"
-    driver = webdriver.Chrome(service = Service(chromedriver), options=chrome_options)
-
+    options = webdriver.ChromeOptions()
+    options.headless=True
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--allow-running-insecure-content')
+    options.add_argument('--headless')
+    #chromedriver = "./chromedriver"
+    #driver = webdriver.Chrome(service = Service(chromedriver), options=chrome_options)
+    driver = webdriver.Chrome(options=options, use_subprocess=True)
+    
     movieLink = "https://soap2day.to/search/keyword/" + movieName.replace(" ","%20")
     #Opens webpage
     driver.get(movieLink)
